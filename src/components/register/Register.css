@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=NTR&family=Poppins:wght@400;500;600&display=swap');
+
+.register {
+  font-family: 'Poppins';
+  margin: 0 10%;
+}
+
+.form h1 {
+    text-decoration: overline;
+    font-weight: 600;
+  }
+  .inputs {
+    margin: 10px;
+    margin-bottom: 10px;
+  }
+  .inputs input {
+    margin-bottom: 10px;
+  }
+  .inputs label {
+    margin-bottom: 5px;
+  }
+  .btn {
+    display: flex;
+    justify-content: center;
+  }
+  .conR button{
+    opacity: 0.7;
+    background-color: rgb(0, 128, 255);  
+    /* background-color: #7688CF; */
+    margin: 10px;
+    padding: 9px 65px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+    display: flex;
+    justify-content: center;
+  }
+
+input, select {
+  padding: 5px 5px;
+}
+.already {
+  margin: 10px 0;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+}
+.already p {
+  margin-right: 10px;
+}
