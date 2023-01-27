@@ -18,6 +18,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 import { getDatabase, ref, set } from "firebase/database";
 
@@ -42,7 +43,6 @@ const db = getFirestore(app);
 
 const googleProvider = new GoogleAuthProvider();
 
-
 const logInWithEmailAndPassword = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
@@ -54,7 +54,8 @@ const logInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (name, email, password) => {
+const registerWithEmailAndPassword = async (name, email, password, file) => {
+  const photo = file;
 
   try {    
         
@@ -67,7 +68,8 @@ const registerWithEmailAndPassword = async (name, email, password) => {
       uid: user.uid,
       name,
       authProvider: "local",
-      email,      
+      email,
+      photo,
     });
 
   } catch (err) {
@@ -85,6 +87,11 @@ const sendPasswordReset = async (email) => {
     alert(err.message);
   }
 };
+
+// Firebase storage reference
+const storage = getStorage(app);
+export default storage;
+
 
 const logout = () => {
   signOut(auth);
