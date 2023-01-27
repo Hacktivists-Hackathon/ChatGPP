@@ -9,7 +9,7 @@ import "./Register.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../../firebase";
 
-import { client } from "@passwordless-id/webauthn";
+import * as webauthn from '@passwordless-id/webauthn'
 
 
 

@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
-import { client } from "@passwordless-id/webauthn";
 
+import * as webauthn from '@passwordless-id/webauthn';
 
 function Login() {
   const [email, setEmail] = useState("");
