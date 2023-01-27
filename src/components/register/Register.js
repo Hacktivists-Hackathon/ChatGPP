@@ -9,8 +9,7 @@ import "./Register.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../../firebase";
 
-import { client } from 'https://unpkg.com/@passwordless-id/webauthn';
-import { setPersistence } from "firebase/auth";
+import { client } from "@passwordless-id/webauthn";
 
 
 
