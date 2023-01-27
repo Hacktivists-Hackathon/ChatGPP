@@ -54,7 +54,7 @@ const logInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (name, email, password, file) => {
+const registerWithEmailAndPassword = async (name, email, password, file, resNew) => {
   const photo = file;
 
   try {    
@@ -70,6 +70,7 @@ const registerWithEmailAndPassword = async (name, email, password, file) => {
       authProvider: "local",
       email,
       photo,
+      resNew,
     });
 
   } catch (err) {

@@ -3,12 +3,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
+import { client } from 'https://unpkg.com/@passwordless-id/webauthn';
+
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();  
+  const [isReady, setIsready] = useState(false);
+
+    
+  const login = async () => {
+    console.log('Authenticating...')
+    let res = client.authenticate([], 'random-challenge-base64-encoded')
+    console.log(res);
+    setIsready(true);
+  }
+
   useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
@@ -33,6 +45,7 @@ function Login() {
             <button onClick={() => logInWithEmailAndPassword(email, password)} type="submit">Se connecter</button>
           </div>         
         </div>
+            <button onClick={login}>Login</button>
         <div className="forget">          
           <div className="forget-pass"><Link to="/reset">Mot de pass oublier</Link></div>
           <p>Je n'ai pas de compte <Link to="/register"> Créer un compte</Link></p>

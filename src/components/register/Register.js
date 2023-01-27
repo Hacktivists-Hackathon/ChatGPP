@@ -9,6 +9,9 @@ import "./Register.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../../firebase";
 
+import { client } from 'https://unpkg.com/@passwordless-id/webauthn';
+import { setPersistence } from "firebase/auth";
+
 
 
 function Register() {
@@ -20,13 +23,29 @@ function Register() {
   const navigate = useNavigate();
   const [fileUrl, setUrl] = useState("");
   const [percent, setPercent] = useState(0);
-  const [isReady, setIsready] = useState(true);
+  const [isReady, setIsready] = useState(false);
+  const [resNew, setResNew] = useState("");
+
 
   const register = () => {
     if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, email, password, fileUrl);
+    console.log(isReady);
+    if (isReady === true) {
+      registerWithEmailAndPassword(name, email, password, fileUrl, resNew);      
+    } else {
+      alert("Touch ID d'abord !!!");
+    }
   };
 
+
+      
+  const registerNew = async function() {
+    console.log('Registering...')
+    let res = client.register('MyUsername', 'random-challenge-base64-encoded')
+    console.log(res);
+    setResNew(res);
+    setIsready(true);
+  }
 
 
   useEffect(() => {
@@ -53,6 +72,7 @@ function Register() {
       // });
 
 
+
   }, [user, loading]);
 
   return (
@@ -75,6 +95,8 @@ function Register() {
         <canvas id="canvas" width="320" height="240"></canvas>
       </label> */}
 
+      <button onClick={registerNew}>Touch ID</button>
+      
         <div className="btn">
           <div className="conR">
             <button onClick={register}>S'inscrire</button>
@@ -84,7 +106,9 @@ function Register() {
           <p>J'ai deja un compte </p><Link to="/Login">Me connecter</Link>
         </div>      
       </div>    
+      
     </div>
+    
   );
 }
 
