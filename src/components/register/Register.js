@@ -8,7 +8,7 @@ import {
 import "./Register.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../../firebase";
-import fingeerprintpic from "../../assets/images/fp.png";
+import fingeerprintpic from "../../assets/images/fp2.png";
 
 
 import { client } from 'https://unpkg.com/@passwordless-id/webauthn';

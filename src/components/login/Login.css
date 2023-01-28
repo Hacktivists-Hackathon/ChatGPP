@@ -22,8 +22,9 @@
     /* min-width: 300px; */
   }
   .form h1{
-    color: rgb(0, 128, 255); 
-    opacity: 0.7; 
+    color: #F04405; 
+    /* background: #F04405; */
+    /* opacity: 0.7;  */
     /* color: #7688CF; */
     text-align: center;
     font-size: 22px;
@@ -41,16 +42,18 @@
     outline: none;
   }
   .form button{
+    padding: 7px 10px;
     border-radius: 5px;
+    
     color: #ffff;
-    background-color:rgb(0, 128, 255);  
+    background-color: #F04405;  
       /* background-color: #7688CF; */
   }
   
   /* ---------- yayahc------------- */
   .inputs-l {
-    margin: 10px;
-    margin-bottom: 10px;
+    margin: 10px 60px;
+    /* margin-bottom: 10px; */
   }
   .inputs-l input {
     margin-bottom: 10px;
@@ -59,11 +62,11 @@
     margin-bottom: 5px;
   }
   .con button{
-    opacity: 0.7;
-    background-color: rgb(0, 128, 255);  
+    /* opacity: 0.7; */
+    background-color: #F04405;  
     /* background-color: #7688CF; */
     margin: 10px;
-    padding: 9px 65px;
+    /* padding: 9px 65px; */
     cursor: pointer;
     border-radius: 3px;
     border: none;

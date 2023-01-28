@@ -6,6 +6,10 @@ import { getFirestore, query, getDocs, collection, onSnapshot, serverTimestamp, 
 import "./chat.css";
 import { logout } from "../../firebase";
 
+import hero from "../../assets/images/undraw_fingerprint_re_uf3f.svg";
+import fing from "../../assets/images/fp.png";
+
+
 function Chat() {
 
     const scroll = useRef();
@@ -27,32 +31,11 @@ function Chat() {
         }
     }; 
 
-    // Send message function
-    const sendMessage = async () => {
-        console.log(username);
-        try {
-        //get message from form field
-        const msg = document.getElementById("message").value;
-        if (msg == '') {
-            // alert(2);
-        } else {
-            //set data to insert in an object
-            const insertData = {
-                message: msg,
-                sender: username,
-                timestamp: serverTimestamp(),
-            }        
-    
-            // Add a new document with a generated id.
-            const docRef = await addDoc(collection(db, "messages"), insertData);
-            var check = console.log("Document written with ID: ", docRef.id);
-            
-        }
 
-        } catch (err) {
-            console.log(err);
-        }     
+    function switchDashboard() {
+        window.location.href = '/dashboard';
     }
+
 
 
     useEffect(() => {
@@ -62,55 +45,27 @@ function Chat() {
         if (loading) return;
         if (!user) navigate("/");
 
-        const q = query(collection(db, 'messages'), orderBy('timestamp'));
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-          let messages = [];
-          querySnapshot.forEach((doc) => {
-            messages.push({ ...doc.data(), id: doc.id });
-          });
-          setMessages(messages.reverse());
-        });
-        return () => unsubscribe();
-        // stopNetworkAcces();
+
 
     }, [user, loading]);
 
 
 
     return (      
-        <>        
-
-                <div className="chat-content">
-
-                    <div id="chat">
-                        <h1>ChatRoom</h1>
-                        {/* messages will display here */}
-                        <div className="chat-cta">
-                            <div className="msgs">
-                                {messages.map(({ id, message, sender, photoURL, uid }) => (
-                                    <div className="msgs-cta">
-                                        <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
-                                            <h4>{sender}</h4>
-                                            <p>{message}</p>
-                                        </div>
-                                        <hr className="hr-chat"></hr>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="btn-chat">                        
-                        <div className="btn-form-chat">
-                            <textarea rows="5" cols="50" id="message" type="text"></textarea>
-                            <button onClick={sendMessage} id="message-btn">Envoyer</button>
-                        </div>
-                    </div>    
-
-                    <div className="btn-logout-chat">
-                            <button onClick={logout} id="message-btn">Logout</button>
-                    </div>       
-                </div>            
+        <>              
+                <div className="btn-logout-chat">
+                    <button onClick={logout} id="message-btn">Logout</button>
+                </div>    
+                <main className="landing-main">
+                    <center><img className="fing" src={fing} alt="Finger"/></center>
+                    <div id="landing-content">
+                            <h1>Sécurisez vos accès aux services web avec l'authentification par empreinte digitale</h1>
+                            <p>Simplifiez votre vie en vous connectant à vos services web en toute sécurité et en un seul clic avec votre empreinte digitale.</p>
+                            <button onClick={switchDashboard} class="btn-primary" type="button">c'est parti</button>
+                        </div>                    
+                
+                </main>                 
+                   
 
         </>
     )

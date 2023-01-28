@@ -5,7 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
 
 import { client } from 'https://unpkg.com/@passwordless-id/webauthn';
-import fingeerprintpic from "../../assets/images/fp.png";
+import fingeerprintpic from "../../assets/images/fp2.png";
 
 
 function Login() {
@@ -14,21 +14,39 @@ function Login() {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();  
   const [isReady, setIsready] = useState(false);
+  const [id, setId] = useState("");
+  const [publicKey, setPublicKey] = useState("");
+  const [resNew, setResNew] = useState("");
 
     
   function logger() {
     console.log(isReady)
-    if (isReady === true) {
-      logInWithEmailAndPassword(email, password);
+    if (isReady === false) {
+      logInWithEmailAndPassword(email, password);     
     } else {
       alert("Touch ID not set !!!");
     }
+
+    // try {
+    //   resNew.then(data => {
+    //     logInWithEmailAndPassword(email, password, data.credential.id, data.credential.publicKey);      
+    //   });
+    // } catch (error) {
+    //   alert(error)
+    // }
+
   }
+
+
   const login = async () => {
-    console.log('Authenticating...')
-    let res = client.authenticate([], 'random-challenge-base64-encoded')
-    console.log(res);
-    setIsready(true);
+    try {
+      console.log('Authenticating...')
+      let res = client.authenticate([], 'random-challenge-base64-encoded')
+      setResNew(res);
+      setIsready(true);          
+    } catch (error) {
+      alert(error);
+    }
   }
 
   useEffect(() => {
@@ -52,19 +70,20 @@ function Login() {
     <div className="login">
       <div className="form">
         <h1>CONNEXION</h1>
-
-        <div className="bio">Biometric</div>
-        <div className="fingerClass">   
-        <br></br>     
-          <button onClick={login} className="touch-id-btn"><img src={fingeerprintpic}></img></button>
-        </div>
+        
         <br></br>
-        <div className="email-pass">Email/Passe</div>
+        {/* <div className="email-pass">Email/Password</div> */}
 
         <div className="inputs-l">
           <br></br>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Entrez votre email"></input>          
           <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Entrez votre mot de pass"></input>
+
+          {/* <div className="bio">Biometric</div> */}
+        <div className="fingerClass">                
+          <button onClick={login} className="touch-id-btn"><img src={fingeerprintpic}></img></button>
+        </div>
+        
           <div className="btn">
             <div className="con">
               <button onClick={logger} type="submit">Se connecter</button>

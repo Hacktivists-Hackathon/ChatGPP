@@ -37,20 +37,19 @@
       border: none;
       display: grid;
       justify-content: center;   
-      opacity: 0.8;   
+      /* opacity: 0.8;    */
       margin: 15px 0;
   }
   .touch-id-btn {
     border: none;
   }
   .touch-id-btn img {
-    opacity: 0.7;
+    /* opacity: 0.7; */
     max-width: 50px;
   }
   .conR button{
-    opacity: 0.7;
-    background-color: rgb(0, 128, 255);  
-    /* background-color: #7688CF; */
+    /* opacity: 0.7; */
+    background: #F04405;    /* background-color: #7688CF; */
     margin: 10px;
     padding: 11px 65px;
     cursor: pointer;
