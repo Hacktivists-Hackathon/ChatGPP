@@ -26,6 +26,7 @@
     opacity: 0.7; 
     /* color: #7688CF; */
     text-align: center;
+    font-size: 22px;
   }
   .inputs-l{
      display:flex;
