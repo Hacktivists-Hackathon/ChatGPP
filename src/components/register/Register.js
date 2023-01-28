@@ -9,8 +9,7 @@ import "./Register.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../../firebase";
 
-import * as webauthn from '@passwordless-id/webauthn'
-
+import { client } from 'https://unpkg.com/@passwordless-id/webauthn';
 
 
 function Register() {
@@ -70,7 +69,7 @@ function Register() {
       //      console.log(image_data_url); 
       // });
 
-
+  
 
   }, [user, loading]);
 

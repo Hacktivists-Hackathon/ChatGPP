@@ -4,7 +4,7 @@ import { auth, logInWithEmailAndPassword } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
 
-import * as webauthn from '@passwordless-id/webauthn';
+// import { client } from 'https://unpkg.com/@passwordless-id/webauthn';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,12 +14,12 @@ function Login() {
   const [isReady, setIsready] = useState(false);
 
     
-  const login = async () => {
-    console.log('Authenticating...')
-    let res = client.authenticate([], 'random-challenge-base64-encoded')
-    console.log(res);
-    setIsready(true);
-  }
+  // const login = async () => {
+  //   console.log('Authenticating...')
+  //   let res = client.authenticate([], 'random-challenge-base64-encoded')
+  //   console.log(res);
+  //   setIsready(true);
+  // }
 
   useEffect(() => {
     if (loading) {
@@ -45,7 +45,7 @@ function Login() {
             <button onClick={() => logInWithEmailAndPassword(email, password)} type="submit">Se connecter</button>
           </div>         
         </div>
-            <button onClick={login}>Login</button>
+            {/* <button onClick={login}>Login</button> */}
         <div className="forget">          
           <div className="forget-pass"><Link to="/reset">Mot de pass oublier</Link></div>
           <p>Je n'ai pas de compte <Link to="/register"> Créer un compte</Link></p>
