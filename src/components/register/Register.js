@@ -33,7 +33,7 @@ function Register() {
     if (isReady === true) {
       registerWithEmailAndPassword(name, email, password, fileUrl, resNew);      
     } else {
-      alert("Touch ID d'abord !!!");
+      alert("Touch ID not set !!!");
     }
   };
 
@@ -82,8 +82,6 @@ function Register() {
         <div className="inputs">
           <br></br>
           <input type="email" value={name} onChange={(e) => setName(e.target.value)} placeholder="Entrez votre nom"></input>     
-          {/* <input type="email" placeholder="Entrez votre prenom"></input>   */}
-          {/* <select><option>Femme</option><option>Homme</option></select><br></br> */}
           <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Entrez votre email"></input>
           <input value={password} onChange={(e) => setPassword(e.target.value)}type="password" placeholder="Entrez un mot de pass"></input>
         </div>

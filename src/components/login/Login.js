@@ -4,7 +4,9 @@ import { auth, logInWithEmailAndPassword } from "../../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./Login.css";
 
-// import { client } from 'https://unpkg.com/@passwordless-id/webauthn';
+import { client } from 'https://unpkg.com/@passwordless-id/webauthn';
+import fingeerprintpic from "../../assets/images/fp.png";
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -14,12 +16,20 @@ function Login() {
   const [isReady, setIsready] = useState(false);
 
     
-  // const login = async () => {
-  //   console.log('Authenticating...')
-  //   let res = client.authenticate([], 'random-challenge-base64-encoded')
-  //   console.log(res);
-  //   setIsready(true);
-  // }
+  function logger() {
+    console.log(isReady)
+    if (isReady === true) {
+      logInWithEmailAndPassword(email, password);
+    } else {
+      alert("Touch ID not set !!!");
+    }
+  }
+  const login = async () => {
+    console.log('Authenticating...')
+    let res = client.authenticate([], 'random-challenge-base64-encoded')
+    console.log(res);
+    setIsready(true);
+  }
 
   useEffect(() => {
     if (loading) {
@@ -28,22 +38,38 @@ function Login() {
     }
     // if user login go to dashboard
     if (user) navigate("/chat");
+
+
+    // const email_pass = document.querySelector(".email-pass");
+    // const inpt = document.querySelector(".inputs-l");
+    // email_pass.addEventListener('click', () => {
+    //   inpt.style.display = "flex";
+    // })
+
   }, [user, loading]);
 
   return (
     <div className="login">
       <div className="form">
         <h1>CONNEXION</h1>
-        <div className="inputs">
+
+        <div className="bio">Biometric</div>
+        <div className="fingerClass">   
+        <br></br>     
+          <button onClick={login} className="touch-id-btn"><img src={fingeerprintpic}></img></button>
+        </div>
+        <br></br>
+        <div className="email-pass">Email/Passe</div>
+
+        <div className="inputs-l">
           <br></br>
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Entrez votre email"></input>          
           <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Entrez votre mot de pass"></input>
-        </div>
-
-        <div className="btn">
-          <div className="con">
-            <button onClick={() => logInWithEmailAndPassword(email, password)} type="submit">Se connecter</button>
-          </div>         
+          <div className="btn">
+            <div className="con">
+              <button onClick={logger} type="submit">Se connecter</button>
+            </div>         
+          </div>
         </div>
             {/* <button onClick={login}>Login</button> */}
         <div className="forget">          

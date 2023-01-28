@@ -50,7 +50,7 @@ const logInWithEmailAndPassword = async (email, password) => {
     console.error(err);
     console.log(err.message); 
     // alert(err.message);
-    alert("Problème de connexion, Email ou mot de pass incorect");
+    alert("Email ou mot de passe incorect !!!");
   }
 };
 

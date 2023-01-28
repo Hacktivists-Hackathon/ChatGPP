@@ -5,6 +5,15 @@
   margin: 0 10%;
 }
 
+.email-pass, .bio {
+  display: flex;
+  justify-content: center;
+}
+
+.email-pass {
+  margin: 20px 0 0 0;
+}
+
   .form{
     margin-top: 100px;
     background-color: #ffff;
@@ -18,12 +27,12 @@
     /* color: #7688CF; */
     text-align: center;
   }
-  .inputs{
+  .inputs-l{
      display:flex;
      flex-direction: column;
      outline: none;
   }
-  .inputs input[type="email"], input[type="password"]{
+  .inputs-l input[type="email"], input[type="password"]{
     padding: 15px;
     border-radius: 5px;
     border: none;
@@ -38,14 +47,14 @@
   }
   
   /* ---------- yayahc------------- */
-  .inputs {
+  .inputs-l {
     margin: 10px;
     margin-bottom: 10px;
   }
-  .inputs input {
+  .inputs-l input {
     margin-bottom: 10px;
   }
-  .inputs label {
+  .inputs-l label {
     margin-bottom: 5px;
   }
   .con button{
