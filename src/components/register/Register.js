@@ -22,16 +22,18 @@ function Register() {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   const [fileUrl, setUrl] = useState("");
-  const [percent, setPercent] = useState(0);
   const [isReady, setIsready] = useState(false);
+  const [id, setId] = useState("");
+  const [publicKey, setPublicKey] = useState("");
   const [resNew, setResNew] = useState("");
-
 
   const register = () => {
     if (!name) alert("Please enter name");
     console.log(isReady);
     if (isReady === true) {
-      registerWithEmailAndPassword(name, email, password, fileUrl, resNew);      
+      resNew.then(data => {
+        registerWithEmailAndPassword(name, email, password, data.credential.id, data.credential.publicKey);      
+      });
     } else {
       alert("Touch ID not set !!!");
     }
@@ -71,7 +73,6 @@ function Register() {
       //      console.log(image_data_url); 
       // });
 
-  
 
   }, [user, loading]);
 

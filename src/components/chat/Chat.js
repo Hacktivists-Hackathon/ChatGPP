@@ -47,18 +47,11 @@ function Chat() {
             const docRef = await addDoc(collection(db, "messages"), insertData);
             var check = console.log("Document written with ID: ", docRef.id);
             
-            addSample('');
         }
 
         } catch (err) {
             console.log(err);
         }     
-    }
-
-
-    function addSample(text) {
-        const msg = document.getElementById("message");
-        msg.value = `${text}`;
     }
 
 

@@ -54,11 +54,10 @@ const logInWithEmailAndPassword = async (email, password) => {
   }
 };
 
-const registerWithEmailAndPassword = async (name, email, password, file, resNew) => {
-  const photo = file;
-  const finger = resNew;
-  try {    
-        
+const registerWithEmailAndPassword = async (name, email, password, id, publicKey) => {
+  const userId = id;
+  const userPublicKey = publicKey;
+  try {            
     // set on Firestore the user informations on user doc call {name}
     const userDoc = collection(db, "users");
 
@@ -69,7 +68,8 @@ const registerWithEmailAndPassword = async (name, email, password, file, resNew)
       name,
       authProvider: "local",
       email,
-      photo,
+      userId,
+      userPublicKey,
     });
 
   } catch (err) {
