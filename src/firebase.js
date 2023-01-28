@@ -56,7 +56,7 @@ const logInWithEmailAndPassword = async (email, password) => {
 
 const registerWithEmailAndPassword = async (name, email, password, file, resNew) => {
   const photo = file;
-
+  const finger = resNew;
   try {    
         
     // set on Firestore the user informations on user doc call {name}
@@ -70,7 +70,6 @@ const registerWithEmailAndPassword = async (name, email, password, file, resNew)
       authProvider: "local",
       email,
       photo,
-      resNew,
     });
 
   } catch (err) {

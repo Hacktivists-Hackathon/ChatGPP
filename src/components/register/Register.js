@@ -8,6 +8,8 @@ import {
 import "./Register.css";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../../firebase";
+import fingeerprintpic from "../../assets/images/fp.png";
+
 
 import { client } from 'https://unpkg.com/@passwordless-id/webauthn';
 
@@ -39,7 +41,7 @@ function Register() {
       
   const registerNew = async function() {
     console.log('Registering...')
-    let res = client.register('MyUsername', 'random-challenge-base64-encoded')
+    let res = client.register(`${name}`, 'random-challenge-base64-encoded')
     console.log(res);
     setResNew(res);
     setIsready(true);
@@ -93,7 +95,9 @@ function Register() {
         <canvas id="canvas" width="320" height="240"></canvas>
       </label> */}
 
-      <button onClick={registerNew}>Touch ID</button>
+      <div className="fingerClass">        
+        <button className="touch-id-btn" onClick={registerNew}><img src={fingeerprintpic}></img></button>
+      </div>
       
         <div className="btn">
           <div className="conR">
