@@ -22,19 +22,29 @@
     justify-content: space-between;
     margin: 80px 0;
 }
-.select-area {
+.item {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+}
+.btn-logout-chat {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+.select-area, .select-area2 {
     display: grid;
     justify-content: center;
     align-items: center;
-    max-width: 200px;
+    /* max-width: 200px; */
     margin-bottom: 40px;
-    padding: 15px 0;
+    padding: 15px 40px;
     text-align: center;
     border-radius: 10px;
     /* background-color: rgba(128, 128, 128, 0.192); */
     border: 1px solid #F04405;
 }
-.select-area img {
+.select-area img, .select-area2 img {
     width: 60px;
     margin: 0 0 10px 0;
 }

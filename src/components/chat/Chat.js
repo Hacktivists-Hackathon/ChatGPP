@@ -53,9 +53,7 @@ function Chat() {
 
     return (      
         <>              
-                <div className="btn-logout-chat">
-                    <button onClick={logout} id="message-btn">Logout</button>
-                </div>    
+                
                 <main className="landing-main">
                     <center><img className="fing" src={fing} alt="Finger"/></center>
                     <div id="landing-content">

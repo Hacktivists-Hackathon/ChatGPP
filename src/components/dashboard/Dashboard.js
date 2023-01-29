@@ -7,8 +7,10 @@ import { doc, updateDoc} from "firebase/firestore";
 import "./dashboard.css";
 import fing from "../../assets/images/fp.png";
 import fb from "../../assets/images/fb_icon_325x325.png";
-import { async } from "@firebase/util";
-// import { async } from "@firebase/util"
+import tt from "../../assets/images/logo.png";
+import ll from "../../assets/images/download.png";
+import ii from "../../assets/images/Instagram_logo_2022.svg.png";
+
 
 function Dashboard() {
     const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +21,14 @@ function Dashboard() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [facebook, setFacebook] = useState("");
-    const [action, setAction] = useState("");
+
+    const [instagram, setInstagram] = useState("");
+    const [twitter, setTwitter] = useState("");
+    const [linkedin, setLinkedin] = useState("");
+    const [actionF, setActionF] = useState("");
+    const [actionI, setActionI] = useState("");
+    const [actionL, setActionL] = useState("");
+    const [actionT, setActionT] = useState("");
 
     const saveDataUserToFirebase = async () => {
         console.log(email);
@@ -38,12 +47,21 @@ function Dashboard() {
             setFacebook(data.facebook);            
             console.log(data)
             if (data.facebook === true) {
-                setAction("Retirer");
+                setActionF("Retirer");
                 const conn = document.querySelector('.conn');
                 conn.style.display = 'block';   
             } else {
-                setAction("Ajoute");
-            }
+                setActionF("Ajoute");
+            };
+     
+            if (data.twitter === true) {
+                setActionT("Retirer");
+                const conn = document.querySelector('.conn');
+                conn.style.display = 'block';   
+            } else {
+                setActionT("Ajoute");
+            };
+           
         } catch (err) {
             console.error(err);
         }
@@ -74,6 +92,9 @@ function Dashboard() {
     const connFb = async () => {
         console.log("satrt chromium login");
     }
+    const connTt = async () => {
+        console.log("satrt chromium login");
+    }
 
     const getFb = async () => {
         if (facebook === true) {
@@ -95,11 +116,74 @@ function Dashboard() {
             add_db.style.display = 'block';            
         }
     }
+
+    const getTt = async () => {
+        if (twitter === true) {
+            try {
+                const userDocByUsername = doc(db, "users", name);
+                await updateDoc(userDocByUsername, {
+                    twitterEmail: null,
+                    twitterPass: null,
+                    twitter: false,
+                    });
+                alert("retirer");
+                window.location.reload();
+
+                } catch (err) {
+                console.error(err);               
+            }
+        } else {
+            const add_db = document.querySelector('.add-db');
+            add_db.style.display = 'block';            
+        }
+    }
+
+    // const getIg = async () => {
+    //     if (facebook === true) {
+    //         try {
+    //             const userDocByUsername = doc(db, "users", name);
+    //             await updateDoc(userDocByUsername, {
+    //                 instagramEmail: null,
+    //                 instagramPass: null,
+    //                 instagram: false,
+    //                 });
+    //             alert("retirer");
+    //             window.location.reload();
+
+    //             } catch (err) {
+    //             console.error(err);               
+    //         }
+    //     } else {
+    //         const add_db = document.querySelector('.add-db');
+    //         add_db.style.display = 'block';            
+    //     }
+    // }
+
+    // const getLk = async () => {
+    //     if (facebook === true) {
+    //         try {
+    //             const userDocByUsername = doc(db, "users", name);
+    //             await updateDoc(userDocByUsername, {
+    //                 linkedinEmail: null,
+    //                 linkedinPass: null,
+    //                 linkedin: false,
+    //                 });
+    //             alert("retirer");
+    //             window.location.reload();
+
+    //             } catch (err) {
+    //             console.error(err);               
+    //         }
+    //     } else {
+    //         const add_db = document.querySelector('.add-db');
+    //         add_db.style.display = 'block';            
+    //     }
+    // }
+
+
     
-    useEffect(() => {
-        setIsLoading(true);
-        
-        if (loading) return;
+    useEffect(() => {        
+        if (loading) return;        
 
         fetchUserInfo();     
         
@@ -116,15 +200,35 @@ function Dashboard() {
             </div>
 
             <div className="selection">
-                <p>Personnalisez votre expérience en sélectionnant les services web que vous souhaitez intégrer.</p>                
+                <p>Personnalisez votre expérience en sélectionnant les services web que vous souhaitez intégrer.</p>                                
             </div>
-            <center className="cc">               
+            <br></br>
+            <div className="item">
                 <div className="select-area">
-                    <center><img src={fb} /></center>
-                    <button onClick={getFb} className="add">{action}</button>
-                    <button onClick={connFb} className="conn">se connecter</button>
-                </div>
-            </center>
+                        <center><img src={fb} /></center>
+                        <button onClick={getFb} className="add">{actionF}</button>
+                        <button onClick={connFb} className="conn">se connecter</button>
+                    </div>
+                    <div className="select-area2">
+                        <center><img src={tt} /></center>
+                        <button onClick={getTt} className="add">{actionT}</button>
+                        <button onClick={connTt} className="conn">se connecter</button>
+                    </div>    
+            </div>
+
+            <div className="item">
+                <div className="select-area">
+                        <center><img src={ii} /></center>
+                        <button  className="add">{actionT}</button>
+                        <button onClick={connFb} className="conn">se connecter</button>
+                    </div>
+                    <div className="select-area2">
+                        <center><img src={ll} /></center>
+                        <button className="add">{actionT}</button>
+                        <button onClick={connFb} className="conn">se connecter</button>
+                    </div>    
+            </div>
+                         
 
             <center className="add-db">
                 <input value={email} onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Entrez votre email"></input>          
@@ -132,6 +236,9 @@ function Dashboard() {
                 <button  onClick={saveDataUserToFirebase}>Enregistrer</button>
             </center>
                        
+            <div className="btn-logout-chat">
+                <button onClick={logout} id="message-btn">Logout</button>
+            </div>    
             </>
         )    
 
