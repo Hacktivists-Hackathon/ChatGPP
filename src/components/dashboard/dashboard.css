@@ -29,6 +29,7 @@
     max-width: 200px;
     margin-bottom: 40px;
     padding: 15px 0;
+    text-align: center;
     border-radius: 10px;
     /* background-color: rgba(128, 128, 128, 0.192); */
     border: 1px solid #F04405;
@@ -40,7 +41,11 @@
 .add-db {
     display: none;
 }
-.add {
+.conn {
+    display: none;
+}
+.add, .conn {
+    margin: 5px 0;
     padding: 7px 10px;
     border-radius: 3px;
     border: none;

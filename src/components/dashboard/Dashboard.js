@@ -18,10 +18,13 @@ function Dashboard() {
     const [name, setName] = useState();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [facebook, setFacebook] = useState("");
+    const [action, setAction] = useState("");
 
     const saveDataUserToFirebase = async () => {
         console.log(email);
-        console.log(password)
+        console.log(password);
+        updateUserProfile();
     }
 
     // Fetch username by uid
@@ -32,7 +35,15 @@ function Dashboard() {
             const data = doc.docs[0].data();
             setData(data);     
             setName(data.name);
+            setFacebook(data.facebook);            
             console.log(data)
+            if (data.facebook === true) {
+                setAction("Retirer");
+                const conn = document.querySelector('.conn');
+                conn.style.display = 'block';   
+            } else {
+                setAction("Ajoute");
+            }
         } catch (err) {
             console.error(err);
         }
@@ -48,18 +59,41 @@ function Dashboard() {
                 await updateDoc(userDocByUsername, {
                     facebookEmail: email,
                     facebookPass: password,
+                    facebook: true,
                 });
             } catch (err) {
             console.error(err);               
         }
-        alert('modification ajouter');
+        alert('ajouter');
+        window.location.reload();
+        }
+        fetchUserInfo();
     }
-    fetchUserInfo();
-}
 
-    function getFb() {
-        const add_db = document.querySelector('.add-db');
-        add_db.style.display = 'block';
+
+    const connFb = async () => {
+        console.log("satrt chromium login");
+    }
+
+    const getFb = async () => {
+        if (facebook === true) {
+            try {
+                const userDocByUsername = doc(db, "users", name);
+                await updateDoc(userDocByUsername, {
+                    facebookEmail: null,
+                    facebookPass: null,
+                    facebook: false,
+                    });
+                alert("retirer");
+                window.location.reload();
+
+                } catch (err) {
+                console.error(err);               
+            }
+        } else {
+            const add_db = document.querySelector('.add-db');
+            add_db.style.display = 'block';            
+        }
     }
     
     useEffect(() => {
@@ -86,8 +120,9 @@ function Dashboard() {
             </div>
             <center className="cc">               
                 <div className="select-area">
-                    <img src={fb} />
-                    <button onClick={getFb} className="add">Ajouter</button>
+                    <center><img src={fb} /></center>
+                    <button onClick={getFb} className="add">{action}</button>
+                    <button onClick={connFb} className="conn">se connecter</button>
                 </div>
             </center>
 
