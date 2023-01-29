@@ -21,7 +21,7 @@ function Login() {
     
   function logger() {
     console.log(isReady)
-    if (isReady === false) {
+    if (isReady === true) {
       logInWithEmailAndPassword(email, password);     
     } else {
       alert("Touch ID not set !!!");
