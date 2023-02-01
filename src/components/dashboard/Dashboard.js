@@ -51,7 +51,7 @@ function Dashboard() {
                 const conn = document.querySelector('.conn');
                 conn.style.display = 'block';   
             } else {
-                setActionF("Ajoute");
+                setActionF("Ajouter");
             };
      
             if (data.twitter === true) {
@@ -82,7 +82,7 @@ function Dashboard() {
             } catch (err) {
             console.error(err);               
         }
-        alert('ajouter');
+        alert('Service Ajouter');
         window.location.reload();
         }
         fetchUserInfo();
@@ -105,7 +105,7 @@ function Dashboard() {
                     facebookPass: null,
                     facebook: false,
                     });
-                alert("retirer");
+                alert("Service Retirer");
                 window.location.reload();
 
                 } catch (err) {
@@ -126,7 +126,7 @@ function Dashboard() {
                     twitterPass: null,
                     twitter: false,
                     });
-                alert("retirer");
+                alert("Service Retirer");
                 window.location.reload();
 
                 } catch (err) {

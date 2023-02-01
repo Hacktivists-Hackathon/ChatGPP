@@ -36,11 +36,11 @@ body {
        background: #F04405;
     border: none;
     border-radius: 5px;
-    padding: 2px 30px;
+    /* padding: 2px 30px; */
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    /* font-size: 20px; */
     line-height: 32px;
     opacity: 0.9;
     color: #FBFCFF;

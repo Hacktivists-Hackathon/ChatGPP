@@ -240,4 +240,7 @@
     #medoc_area {
         grid-template-columns: 1fr 1fr;
     }
+    .item {
+        gap: 1rem;
+    }
 }
